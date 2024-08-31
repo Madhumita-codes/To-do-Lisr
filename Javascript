@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let tasks = [];
 
-    // Add new task
+    
     addTaskBtn.addEventListener('click', () => {
         const taskText = taskInput.value.trim();
         if (taskText) {
