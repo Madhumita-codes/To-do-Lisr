@@ -1,0 +1,30 @@
+
+async function fetchTasks() {
+    const response = await fetch('http://localhost:3000/tasks');
+    tasks = await response.json();
+    renderTasks();
+}
+
+
+fetchTasks();
+
+
+addTaskBtn.addEventListener('click', async () => {
+    const taskText = taskInput.value.trim();
+    if (taskText) {
+        const task = { id: Date.now(), text: taskText, completed: false };
+        await fetch('http://localhost:3000/tasks', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(task)
+        });
+        fetchTasks();
+        taskInput.value = '';
+    }
+});
+
+
+window.deleteTask = async function (id) {
+    await fetch(`http://localhost:3000/tasks/${id}`, { method: 'DELETE' });
+    fetchTasks();
+};
